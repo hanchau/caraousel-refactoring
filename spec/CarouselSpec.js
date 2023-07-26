@@ -10,20 +10,29 @@ describe("Photo Carousel", function () {
         { img: '/base/art/beatles.jpeg', info: 'Beatles' },
         { img: '/base/art/nirvana.jpeg', info: 'Nirvana' }
     ];
+    const container = document.createElement('div');
 
     beforeEach(function () {
         jasmine.getStyleFixtures().fixturesPath = '/base/css';
         loadStyleFixtures("style.css");
         setFixtures('<div id="scratch"></div>');
+        container.setAttribute('id', 'cover-flow');
+        document.body.appendChild(container)
     });
 
     it( "Start here", function () {
         expect(true).toBeTruthy();
     });
 
-    it( "should land on the 'Green Day' album cover with display text 'Green Day'.", function () {
-        expect( data[4].img ).toEqual( '/base/art/greenday.jpeg' );
-        expect( data[4].info ).toEqual( 'Green Day' );
-    })
+    it( "given the data size to be nine the selected index should be 4.", function () {
+        const coverFlow = new CoverFlow('#cover-flow', data);
+        expect(coverFlow.selectedIdx).toBe(4);
+    });
+
+    it('selected cover should be 200px width and height.', function () {
+        const coverFlow = new CoverFlow('#cover-flow', data);
+        expect(container.querySelector(`#IMAGE_${coverFlow.selectedIdx}`).style.width).toBe('200px');
+        expect(container.querySelector(`#IMAGE_${coverFlow.selectedIdx}`).style.height).toBe('200px');
+    });
 
 });
