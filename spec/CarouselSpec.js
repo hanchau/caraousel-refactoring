@@ -20,10 +20,6 @@ describe("Photo Carousel", function () {
         document.body.appendChild(container)
     });
 
-    it( "Start here", function () {
-        expect(true).toBeTruthy();
-    });
-
     it( "given the data size to be nine the selected index should be 4.", function () {
         const coverFlow = new CoverFlow('#cover-flow', data);
         expect(coverFlow.selectedIdx).toBe(4);
@@ -33,6 +29,24 @@ describe("Photo Carousel", function () {
         const coverFlow = new CoverFlow('#cover-flow', data);
         expect(container.querySelector(`#IMAGE_${coverFlow.selectedIdx}`).style.width).toBe('200px');
         expect(container.querySelector(`#IMAGE_${coverFlow.selectedIdx}`).style.height).toBe('200px');
+    });
+
+    it('selected index should should be moved to `selectedIdx - 1` when clicked on backward button.', function () {
+        const coverFlow = new CoverFlow('#cover-flow', data);
+        const oldSelectedIndex = coverFlow.selectedIdx;
+        $("#backward").click();
+        expect(coverFlow.selectedIdx).toBe(oldSelectedIndex - 1);
+        expect(container.querySelector(`#IMAGE_${oldSelectedIndex}`).style.width).toBe('100px');
+        expect(container.querySelector(`#IMAGE_${oldSelectedIndex}`).style.height).toBe('100px');
+    });
+
+    it('selected index should should be moved to `selectedIdx + 1` when clicked on forward button.', function () {
+        const coverFlow = new CoverFlow('#cover-flow', data);
+        const oldSelectedIndex = coverFlow.selectedIdx;
+        $("#forward").click();
+        expect(coverFlow.selectedIdx).toBe(oldSelectedIndex + 1);
+        expect(container.querySelector(`#IMAGE_${oldSelectedIndex}`).style.width).toBe('100px');
+        expect(container.querySelector(`#IMAGE_${oldSelectedIndex}`).style.height).toBe('100px');
     });
 
 });
