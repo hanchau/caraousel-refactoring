@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>CoverFlow</title>
+    <script src="lib/jquery-1.8.1.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="css/style.css">
+</head>
+<body style="text-align: center">
+	<h1>Rock Album Covers</h1>
+	<div id="scratch"></div>
+    <script src="js/Carousel.js"></script>
+
+<script>
+    var data = [
+        { img: 'art/ledZeppelin.jpeg', info: 'Led Zeppelin' },
+        { img: 'art/rollingStones.jpeg', info: 'Rolling Stones' },
+        { img: 'art/ironMaiden.jpeg', info: 'Iron Maiden' },
+        { img: 'art/queen.jpeg', info: 'Queen' },
+        { img: 'art/greenday.jpeg', info: 'Green Day' },
+        { img: 'art/acdc.jpeg', info: 'AC/DC' },
+        { img: 'art/judasPriest.jpeg', info: 'Judas Priest' },
+        { img: 'art/beatles.jpeg', info: 'Beatles' },
+        { img: 'art/nirvana.jpeg', info: 'Nirvana' }
+    ];
+    new CoverFlow( '#scratch', data );
+</script>
+</body>
+</html>
