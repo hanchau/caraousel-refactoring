@@ -33,10 +33,10 @@ describe("Photo Carousel", function () {
 
         // Act
         const coverFlow = new CoverFlow('#cover-flow', data);
-        expect(container.querySelector(`#IMAGE_${coverFlow.selectedIdx}`).style.width).toBe('200px');
-        expect(container.querySelector(`#IMAGE_${coverFlow.selectedIdx}`).style.height).toBe('200px');
 
         // Assert
+        expect(container.querySelector(`#IMAGE_${coverFlow.selectedIdx}`).style.width).toBe('200px');
+        expect(container.querySelector(`#IMAGE_${coverFlow.selectedIdx}`).style.height).toBe('200px');
         expect($("#infoBox").text()).toEqual(data[coverFlow.selectedIdx].info);
     });
 
@@ -45,7 +45,7 @@ describe("Photo Carousel", function () {
         // Arrange
         const coverFlow = new CoverFlow('#cover-flow', data);
 
-        for (let index = data.length/2; index >= 0 ; index--) {
+        for(let index = data.length/2; index >= 0 ; index--) {
             const oldSelectedIndex = coverFlow.selectedIdx;
             if (index == 0) {
                 expect($("#backward").click()).toThrow(`You can't go farther left.`)}
@@ -82,7 +82,7 @@ describe("Photo Carousel", function () {
     });
 
 
-    it('if clicked on `Beatles` cover the selectedIdx should be updated ' +
+    it('if clicked on `Beatles` cover, the selectedIdx should be updated to the Beatles Index ' +
         'and Beatles Covers height and width should be updated to 200px and 200px ' +
         'and info box should be updated with the info `Beatles` ' +
         'and previously selected image height and width should be reduced to 100px and 100px.', function () {
@@ -94,6 +94,7 @@ describe("Photo Carousel", function () {
         });
         let oldSelectedIdx = coverFlow.selectedIdx;
         var imageofBeatles = `#IMAGE_${indexOfBeatles}`
+        var fistImage = `#IMAGE_0`
         var oldImage = `#IMAGE_${oldSelectedIdx}`
 
         // Act
@@ -104,8 +105,16 @@ describe("Photo Carousel", function () {
         expect(container.querySelector(imageofBeatles).style.width).toBe('200px');
         expect(container.querySelector(imageofBeatles).style.height).toBe('200px');
         expect($("#infoBox").text()).toEqual(data[coverFlow.selectedIdx].info);
-        expect(container.querySelector(oldImage).style.height).toBe('100px');
-        expect(container.querySelector(oldImage).style.height).toBe('100px');
+
+        // Assert 2: All other Covers should be 100px height and width;
+        for (let index = 0; index <= data.length - 1 ; index++) {
+            if (index == indexOfBeatles){
+                continue;
+            }
+            // Assert
+            expect(container.querySelector(`#IMAGE_${index}`).style.width).toBe('100px');
+            expect(container.querySelector(`#IMAGE_${index}`).style.height).toBe('100px');
+        }
 
     });
 
